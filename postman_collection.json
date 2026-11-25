@@ -1,0 +1,69 @@
+{
+  "info": {
+    "name": "PulseCommerce Engine API",
+    "description": "Send orders to PulseCommerce pipeline via Postman",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/health",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["health"]
+        }
+      }
+    },
+    {
+      "name": "2. Send Valid Order",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"customer_name\": \"Bilal Ahmed\",\n  \"product_name\": \"Samsung Galaxy S24\",\n  \"product_category\": \"smartphones\",\n  \"brand\": \"Samsung\",\n  \"unit_price\": 899.99,\n  \"shipping_cost\": 12.50,\n  \"total_amount\": 912.49,\n  \"items_count\": 1,\n  \"product_weight_g\": 234.0,\n  \"payment_method\": \"Credit Card\",\n  \"rating\": 4.8,\n  \"stock\": 50\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/order",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["order"]
+        }
+      }
+    },
+    {
+      "name": "3. Send Bad Order (DLQ Test)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"customer_name\": \"Test User\",\n  \"product_name\": \"Bad Product\",\n  \"product_category\": \"test\",\n  \"brand\": \"N/A\",\n  \"unit_price\": -50.0,\n  \"shipping_cost\": 0.0,\n  \"total_amount\": -50.0,\n  \"items_count\": 1,\n  \"payment_method\": \"Cash\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/order",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["order"]
+        }
+      }
+    }
+  ]
+}

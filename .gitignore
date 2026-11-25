@@ -1,0 +1,19 @@
+# Environment
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Large data files (download separately from Kaggle)
+data/
+
+# Runtime folders (generated during execution)
+staging_inbox/
+dead_letter/
